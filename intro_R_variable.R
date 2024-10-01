@@ -1,3 +1,5 @@
+
+library(ggplot2)
 #' In R, variables are used to store data that you can use and manipulate in your scripts and functions. Here’s a basic rundown on how to work with variables in R:
 #'   
 #' ### 1. Creating Variables
@@ -39,35 +41,89 @@ name
 #'   
 xx <- xx + 5    # xx is now 15
 xx 
-# ### 6. Removing Variables
-# 
-# If you need to remove a variable, use the `rm()` function:
+yy <- xx   # new object yy copy of xx created 
+yy 
+#'
+#'
+#'
+#' ### 6. Removing Variables
+#' 
+#' If you need to remove a variable, use the `rm()` function:
+#'   
+
+rm(yy)
+
+#' 
+#' ### 7. Checking Variable Types
+#' 
+#' You can check the type of a variable using functions like `class()`, `typeof()`, and `is.*()`:
 #   
-#   ```r
-# rm(x)
-# ```
-# 
-# ### 7. Checking Variable Types
-# 
-# You can check the type of a variable using functions like `class()`, `typeof()`, and `is.*()`:
-#   
-#   ```r
-# class(name)  # Returns "character"
-# typeof(x)    # Returns "double"
-# is.numeric(x) # Returns TRUE if x is numeric
-# ```
-# 
-# ### 8. Special Variables
-# 
-# - **`NA`**: Represents missing values.
-# - **`NULL`**: Represents the absence of a value or an empty object.
-# 
-# ### 9. Environment
-# 
-# Variables are stored in environments, with the global environment being where your variables are usually stored when you work interactively.
-# 
-# ```r
-# ls()          # Lists all variables in the current environment
-# ```
-# 
-# Feel free to ask if you have specific questions about variables or need examples of more advanced uses!
+
+class(name)  # Returns "character"
+typeof(xx)    # Returns "double"
+is.numeric(xx) # Returns TRUE if x is numeric
+#' ### 8. Special Variables
+#' 
+#' - **`NA`**: Represents missing values.
+#' - **`NULL`**: Represents the absence of a value or an empty object.
+#' 
+#' ### 9. Environment
+#' 
+#' Variables are stored in environments, with the global environment being where your variables are usually stored when you work interactively.
+#' 
+
+ls()          # Lists all variables in the current environment
+ 
+#' ### 10. how to disect an unfamilair expression 
+L3 <- LETTERS[1:3]
+L3
+LETTERS
+1:3
+#1 2 3 4 5
+#1:2:3:4:5
+1:5
+1:23
+0:100
+-5:23
+10:-1
+A-D
+#LETTER (A:B) Error in LETTER(A:B) : could not find function "LETTER"
+LETTERS[1:3]
+LETTERS[25:27]
+LETTERS[23-26]
+LETTERS[23:26]
+23-26
+LETTERS[-3]
+LETTERS[27]
+LETTERS[3]
+LETTERS[3:5]
+LETTERS[-(3:5)]
+#WHENEVER THERE IS A SQUT BRACKET IT IS EXPRESSING THE DIFFEREHT VARIABLES ,
+#SUBSETTINGS FOR EXAMPLE 1-3 , A-B. BASICALLY ITS THE EXPRESSION EXAMPLE: L3 IS
+#THE NMAE OF THE OBJECT AND 1:3 0R 1:100 IS THE EXPRESSION. BUT IF YIU WRITE 1-3
+#(IT IS MINUES 3)
+char <- sample(L3, 10, replace = TRUE)
+char
+# CHAR IS THE OBJECT SAMPLE IS THE NAME OF THE FUNCTION ADN REPLACE IS THE NAME.
+#IN THE ABOVE THE FIRST ARGUMENT IS L3 , SECOND IS 10 AND THE THIRD IS TRUE
+5+3
+5:3
+
+#' # dataframes
+#' 
+#' how to tell the number of rows and columns 
+dim(cars)
+NROW(cars)
+NCOL(cars)
+#' how to selet particular records in data frame
+names(mpg)
+summary(mpg)
+subset(mpg, year ==2008 & cyl == 4 & model == 'a4')
+subset(mpg, year ==2008 & cyl != 4 & model == 'a4')
+subset(mpg, year ==2008 & cyl == 4 & model != 'a4')
+subset(mpg, year ==2008 | cyl == 4 | model != 'a4')
+
+
+
+
+
