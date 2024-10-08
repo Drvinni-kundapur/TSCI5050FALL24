@@ -1,4 +1,4 @@
-
+library(tidyverse)
 library(ggplot2)
 #' In R, variables are used to store data that you can use and manipulate in your scripts and functions. Here’s a basic rundown on how to work with variables in R:
 #'   
@@ -118,12 +118,21 @@ NCOL(cars)
 #' how to selet particular records in data frame
 names(mpg)
 summary(mpg)
+#'### selecting rows of interest
 subset(mpg, year ==2008 & cyl == 4 & model == 'a4')
 subset(mpg, year ==2008 & cyl != 4 & model == 'a4')
 subset(mpg, year ==2008 & cyl == 4 & model != 'a4')
 subset(mpg, year ==2008 | cyl == 4 | model != 'a4')
+flights_sml <- select(flights,arr_delay,dep_delay,distance,air_time)
+#' ### selecting columns of interest
+#' ### selecting mutate 
+mutate(flights_sml,
+    gain = 2*distance ,
+      speed = distance / air_time * 60)
 
-
-
-
-
+#' ### selecting transmute 
+transmute (flights_sml, dep_delay ,
+ gain = arr_delay - dep_delay,test =10,
+ speed = distance / air_time * 60) 
+#' ### summarize the data
+summarize(flights,dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T)) 
