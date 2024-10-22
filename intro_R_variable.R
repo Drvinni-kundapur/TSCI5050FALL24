@@ -1,7 +1,9 @@
 library(tidyverse)
 library(ggplot2)
+library(nycflights13)
 #' In R, variables are used to store data that you can use and manipulate in your scripts and functions. Here’s a basic rundown on how to work with variables in R:
 #'   
+# new variables ----
 #' ### 1. Creating Variables
 #'   
 #'   To create a variable in R, you use the assignment operator `<-` (though `=` is also valid in most cases). For example:
@@ -15,7 +17,7 @@ name
 #' - **Names must start with a letter** (a-z, A-Z).
 #' - **Names can include letters, numbers, and dots (.)** but cannot start with a number.
 #' - **Names are case-sensitive**, so `var` and `Var` would be considered different variables.
-#' 
+# data types ----
 #' ### 3. Basic Data Types
 #' 
 #' Variables in R can store different types of data:
@@ -27,7 +29,7 @@ name
 #' - **Complex**: `z <- 2 + 3i`
 #' 
 #' ### 4. Data Structures
-#' 
+# data structure ----
 #' Variables can also store more complex data structures:
 #'   
 #'   - **Vectors**: `v <- c(1, 2, 3, 4)`
@@ -36,7 +38,8 @@ name
 #' - **Lists**: `lst <- list(Name="Alice", Age=25, Scores=c(90, 85, 88))`
 #' 
 #' ### 5. Accessing and Modifying Variables
-#' 
+# accessing and modifying variables ----
+
 #' To access or modify variables, you simply refer to them by their name. For example:
 #'   
 xx <- xx + 5    # xx is now 15
@@ -47,7 +50,7 @@ yy
 #'
 #'
 #' ### 6. Removing Variables
-#' 
+# removing variables ----
 #' If you need to remove a variable, use the `rm()` function:
 #'   
 
@@ -55,6 +58,7 @@ rm(yy)
 
 #' 
 #' ### 7. Checking Variable Types
+# checking variable types ----
 #' 
 #' You can check the type of a variable using functions like `class()`, `typeof()`, and `is.*()`:
 #   
@@ -63,18 +67,20 @@ class(name)  # Returns "character"
 typeof(xx)    # Returns "double"
 is.numeric(xx) # Returns TRUE if x is numeric
 #' ### 8. Special Variables
+# special variable ----
 #' 
 #' - **`NA`**: Represents missing values.
 #' - **`NULL`**: Represents the absence of a value or an empty object.
 #' 
 #' ### 9. Environment
-#' 
+# environment ----
 #' Variables are stored in environments, with the global environment being where your variables are usually stored when you work interactively.
 #' 
 
 ls()          # Lists all variables in the current environment
  
 #' ### 10. how to disect an unfamilair expression 
+# disect an unfamilier expression ----
 L3 <- LETTERS[1:3]
 L3
 LETTERS
@@ -86,7 +92,7 @@ LETTERS
 0:100
 -5:23
 10:-1
-A-D
+# 'A-D 
 #LETTER (A:B) Error in LETTER(A:B) : could not find function "LETTER"
 LETTERS[1:3]
 LETTERS[25:27]
@@ -109,8 +115,8 @@ char
 5+3
 5:3
 
-#' # dataframes
-#' 
+#' ### 11  dataframes
+# dataframes ----
 #' how to tell the number of rows and columns 
 dim(cars)
 NROW(cars)
@@ -123,8 +129,11 @@ subset(mpg, year ==2008 & cyl == 4 & model == 'a4')
 subset(mpg, year ==2008 & cyl != 4 & model == 'a4')
 subset(mpg, year ==2008 & cyl == 4 & model != 'a4')
 subset(mpg, year ==2008 | cyl == 4 | model != 'a4')
-flights_sml <- select(flights,arr_delay,dep_delay,distance,air_time)
+
 #' ### selecting columns of interest
+#' these two are equivalent
+flights_sml <- select(flights,arr_delay,dep_delay,distance,air_time)
+`<-`(flights_sml,select(flights,arr_delay,dep_delay,distance,air_time))
 #' ### selecting mutate 
 mutate(flights_sml,
     gain = 2*distance ,
