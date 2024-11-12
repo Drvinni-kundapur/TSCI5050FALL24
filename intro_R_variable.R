@@ -32,7 +32,7 @@ name
 # data structure ----
 #' Variables can also store more complex data structures:
 #'   
-#'   - **Vectors**: `v <- c(1, 2, 3, 4)`
+#'   - **Vectors**: `v <- c(1, 2, 3, 4)` Vectors are in an order or sequence, they can repeat , can be letter or number. It is a collection of values. 
 #' - **Matrices**: `m <- matrix(1:6, nrow=2)`
 #' - **Data Frames**: `df <- data.frame(Name=c("Alice", "Bob"), Age=c(25, 30))`
 #' - **Lists**: `lst <- list(Name="Alice", Age=25, Scores=c(90, 85, 88))`
@@ -134,14 +134,39 @@ subset(mpg, year ==2008 | cyl == 4 | model != 'a4')
 #' these two are equivalent
 flights_sml <- select(flights,arr_delay,dep_delay,distance,air_time)
 `<-`(flights_sml,select(flights,arr_delay,dep_delay,distance,air_time))
-#' ### selecting mutate 
+#' ### mutate 
 mutate(flights_sml,
     gain = 2*distance ,
       speed = distance / air_time * 60)
 
-#' ### selecting transmute 
+#' ### transmute 
+transmute(flights_sml,
+       gain = 2*distance ,
+       speed = distance / air_time * 60)
 transmute (flights_sml, dep_delay ,
  gain = arr_delay - dep_delay,test =10,
  speed = distance / air_time * 60) 
 #' ### summarize the data
 summarize(flights,dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T)) 
+#' ### grouping the data 
+group_by(flights,carrier)
+summarize(group_by(flights,carrier),dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T)) 
+mean_delay <-summarize(group_by(flights,carrier),dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T)) 
+mean_delay
+#' ### sorting data 
+arrange(flights,arr_delay)
+arrange(flights,desc(arr_delay ))
+arrange(flights,carrier,desc(arr_delay ))
+arrange(mean_delay,carrier,desc(arr_delay ))
+arrange(mean_delay,desc(arr_delay ))
+arrange(summarize(group_by(flights,carrier),dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T)) ,desc(arr_delay ))
+#'### pipeline 
+group_by(flights,carrier) %>% 
+  summarize (dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T))
+group_by(flights,carrier) %>% 
+  summarize (dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T)) %>%
+  View()
+group_by(flights,carrier) %>% 
+  summarize (dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T)) %>%
+  arrange(desc(arr_delay)) %>% 
+  View()
