@@ -162,11 +162,44 @@ arrange(mean_delay,desc(arr_delay ))
 arrange(summarize(group_by(flights,carrier),dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T)) ,desc(arr_delay ))
 #'### pipeline 
 group_by(flights,carrier) %>% 
-  summarize (dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T))
+  summarize (dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T)) 
+
 group_by(flights,carrier) %>% 
   summarize (dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T)) %>%
-  View()
-group_by(flights,carrier) %>% 
-  summarize (dep_delay= mean (dep_delay, na.rm=T) , arr_delay= mean (arr_delay, na.rm=T)) %>%
-  arrange(desc(arr_delay)) %>% 
-  View()
+  arrange(desc(arr_delay)) 
+
+#' ### ggplot
+ggplot(flights)
+ggplot(data=flights,mapping=aes(x=arr_delay,y=dep_delay))
+ggplot(data=flights,mapping=aes(x=arr_delay,y=dep_delay)) + geom_point() 
+ggplot(data=flights,mapping=aes(x=arr_delay,y=dep_delay)) + geom_point()  + 
+  geom_line()
+ggplot(data=flights,mapping=aes(x=arr_delay,y=dep_delay,color=carrier)) + geom_point()  + 
+  geom_line()
+ggplot(data=flights,mapping=aes(x=arr_delay,y=dep_delay,color=carrier)) + geom_point()  + 
+  geom_line(color='black')
+# using a smaller dataset
+NROW(flights)
+slice_sample(flights,n=50000) %>% NROW()
+slice_sample(flights,n=50000) %>% ggplot(mapping=aes(x=arr_delay,y=dep_delay,color=carrier)) + geom_point()  + 
+  geom_line(color='black')
+# continuing to refine the plot
+slice_sample(flights,n=50000) %>% ggplot(mapping=aes(x=arr_delay,y=dep_delay,color=carrier)) + geom_point()  + 
+  geom_smooth(color='black', alpha=0.5)
+class(flights$time_hour)
+slice_sample(flights,n=50000) %>% 
+  ggplot(mapping=aes(x=arr_delay,y=dep_delay,color=carrier,alpha=time_hour)) + geom_point()  + 
+  geom_smooth(color='black', alpha=0.5)
+slice_sample(flights,n=50000) %>% 
+  ggplot(mapping=aes(x=arr_delay,y=dep_delay,color=carrier,alpha=air_time)) + geom_point()  + 
+  geom_smooth(color='black', alpha=0.5)
+slice_sample(flights,n=50000) %>% 
+  ggplot(mapping=aes(x=arr_delay,y=dep_delay,color=carrier,alpha=air_time)) + geom_point()  + 
+  geom_smooth(color='black', alpha=0.5,method = 'lm')
+slice_sample(flights,n=500) %>% 
+  ggplot(mapping=aes(x=arr_delay,y=dep_delay,color=carrier,alpha=air_time)) + geom_point()  + 
+  geom_smooth(color='black', alpha=0.5,method = 'lm',fill='blue',level=0.999)
+slice_sample(flights,n=500) %>% 
+  ggplot(mapping=aes(x=arr_delay,y=dep_delay,color=carrier,alpha=air_time)) + geom_point()  + 
+  geom_smooth(color='black', alpha=0.5,method = 'lm',fill='blue',level=0.999) + 
+  geom_abline(slope=1,intercept=0,color='red')
