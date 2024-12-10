@@ -13,3 +13,7 @@
 /*.tar.gz
 # Output files from R CMD check
 intro_R_variable.html
+*.html
+*.xlsx
+*.xls
+*.csv
