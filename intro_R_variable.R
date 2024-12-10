@@ -1,6 +1,8 @@
 library(tidyverse)
 library(ggplot2)
 library(nycflights13)
+library(DataExplorer)
+
 #' In R, variables are used to store data that you can use and manipulate in your scripts and functions. Here’s a basic rundown on how to work with variables in R:
 #'   
 # new variables ----
